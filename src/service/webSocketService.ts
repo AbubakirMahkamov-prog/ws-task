@@ -29,6 +29,7 @@ export default class WebSocketService {
   
     sendMessage(message: string): void {
       if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+       
         this.socket.send(JSON.stringify(message));
       } else {
         console.warn('WebSocket is not connected');
