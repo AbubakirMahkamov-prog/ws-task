@@ -18,18 +18,18 @@ export default class WebSocketService {
         console.log('Message from server: ', event.data);
       };
   
-      this.socket.onclose = () => {
-        console.log('WebSocket connection closed');
+      this.socket.onclose = (e) => {
+        console.log('WebSocket connection closed', e);
       };
   
       this.socket.onerror = (error: Event) => {
         console.error('WebSocket error: ', error);
       };
     }
-  
-    sendMessage(message: string): void {
+    
+    sendMessage(message: any): void {
       if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-       
+        // this.socket.
         this.socket.send(JSON.stringify(message));
       } else {
         console.warn('WebSocket is not connected');

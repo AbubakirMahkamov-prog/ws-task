@@ -22,8 +22,3 @@
     emits('close')
   };
   </script>
-  
-  <style scoped>
-  /* Optional: Add any additional styles here */
-  </style>
-  

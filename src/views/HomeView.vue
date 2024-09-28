@@ -54,13 +54,14 @@
 
 <script setup lang="ts">
 import Alert from '../components/Alert.vue'; // Import your Alert component
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 // Define the types for the option object
 interface IOption {
   name: string;
   id: string;
+  token: string;
   [key: string]: string; // Allow string indexing
 }
 
@@ -78,10 +79,12 @@ const valueField = ref('id');   // Define the value field key
 
 // Options array with type safety
 const options = ref<IOption[]>([
-  { name: 'User 1', id: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozNCwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNzI3NDE4Nzc4LCJleHAiOjE3NTYyMTg3NzgsImp0aSI6Ijk5ZmU3MGM2YmVkYzRmNDdiY2RlYTBjZWJkOTM2ODFmIiwidG9rZW5fdHlwZSI6ImFjY2VzcyJ9.ty9aJY6K4xNm9uNTj7hhmGfvcP4nXJUyCjVx_7gPNqY` },
-  { name: 'User 2', id: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozMywicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNzI3NDE4ODA0LCJleHAiOjE3NTYyMTg4MDQsImp0aSI6IjhjMDg0YTE1N2M2YTRiZWRhZDM2Njk1ZjllNTU2ZWM4IiwidG9rZW5fdHlwZSI6ImFjY2VzcyJ9.iGGslcVbaOPPwsOyuzGNjig0gqwteM_2GtV5ofmoIj0` },
+  { name: 'Fozil', id: '34', token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozNCwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNzI3NDE4Nzc4LCJleHAiOjE3NTYyMTg3NzgsImp0aSI6Ijk5ZmU3MGM2YmVkYzRmNDdiY2RlYTBjZWJkOTM2ODFmIiwidG9rZW5fdHlwZSI6ImFjY2VzcyJ9.ty9aJY6K4xNm9uNTj7hhmGfvcP4nXJUyCjVx_7gPNqY` },
+  { name: 'Mirmux', id: '33', token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozMywicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNzI3NDE4ODA0LCJleHAiOjE3NTYyMTg4MDQsImp0aSI6IjhjMDg0YTE1N2M2YTRiZWRhZDM2Njk1ZjllNTU2ZWM4IiwidG9rZW5fdHlwZSI6ImFjY2VzcyJ9.iGGslcVbaOPPwsOyuzGNjig0gqwteM_2GtV5ofmoIj0` },
 ]);
-
+onMounted(() => {
+  localStorage.setItem('users', JSON.stringify(options.value));
+})
 // Toggle dropdown open/close
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value;
