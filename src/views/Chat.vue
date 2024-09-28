@@ -100,7 +100,7 @@ onMounted(() => {
   const user = JSON.parse(localStorage.getItem("user") as string);
   const users = JSON.parse(localStorage.getItem("users") as string);
   const token = user.token;
-  const wsUrl = `wss://5.182.26.58:4321/ws/web?token=${token}`;
+  const wsUrl = `ws://5.182.26.58:4321/ws/web?token=${token}`;
   wsService.value = new WebSocketService(wsUrl);
   wsService.value.connect();
   setTimeout(() => {
